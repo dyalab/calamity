@@ -1,6 +1,7 @@
 Follow these instructions to teleoperate the schunk arm via joystick control.
 Most of them are taken from the sns tutorial, so if you need more help that would likely be your best resource.
 
+You are assumed to have
 
 RUN SNS TELEOPD
 ===============
@@ -11,6 +12,11 @@ Set Up Environment
 
 * Run the sns_tutorial_setup.sh file to set up appropriate environmental variables and ach channels.
 * You will need to change the SNS_SCENE_PLUGIN variables depending on your setup
+* The sns tutorial has you running the command:
+
+      	cd amino && ./configure --enable-demos --enable-demo-schunk && make
+	
+* But I think that since you already have the necessary urdf files this may not be necessary?
 
 Run Simulation Tests
 --------------------
