@@ -1,7 +1,7 @@
 Follow these instructions to teleoperate the schunk arm via joystick control.
 Most of them are taken from the sns tutorial, so if you need more help that would likely be your best resource.
 
-You are assumed to have
+You are assumed to have sns installed, you might need amino as well but I'm not sure
 
 RUN SNS TELEOPD
 ===============
