@@ -1,0 +1,5 @@
+#!/bin/sh
+
+/home/simonreisig/Research/amino/aarx-view \
+    /home/simonreisig/Research/amino/demo/urdf/schunk/.libs/libamino_schunk.so \
+    -n "lwa4d"
