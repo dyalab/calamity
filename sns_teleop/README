@@ -1,7 +1,7 @@
 Follow these instructions to teleoperate the schunk arm via joystick control.
 Most of them are taken from the sns tutorial, so if you need more help that would likely be your best resource.
 
-You are assumed to have sns installed, you might need amino as well but I'm not sure
+You are assumed to have sns & ach installed, you might need amino as well but I'm not sure
 
 RUN SNS TELEOPD
 ===============
@@ -39,9 +39,10 @@ Teleoperate the Arm
 -------------------
 
 * Start the joystick/gamepad driver (for 6-axis gamepad)
+* Make sure that the little switch on the back is set to 'D' for the correct button/trigger mappings
 * TODO: update this command with ntd's parameters to fix things
 
-  	sns run -d -r joy -- sns-joyd -a 6
+  	sns run -d -r joy -- sns-joyd-logitech-f310 -a 6
 
 *Dump the joystick channel to see how the axes are set up
 
