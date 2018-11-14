@@ -42,7 +42,7 @@ Teleoperate the Arm
 * Make sure that the little switch on the back is set to 'D' for the correct button/trigger mappings
 * TODO: update this command with ntd's parameters to fix things
 
-  	sns run -d -r joy -- sns-joyd-logitech-f310 -a 6
+  	sns run -d -r joy -- sns-joyd -a 6
 
 *Dump the joystick channel to see how the axes are set up
 
