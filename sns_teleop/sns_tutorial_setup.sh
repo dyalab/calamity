@@ -16,7 +16,7 @@ fi
 if [ $robot = schunk ]
 then
     export SNS_SCENE_NAME=lwa4d
-    export SNS_SCENE_PLUGIN=~/Research/amino/demo/urdf/schunk/.libs/libamino_schunk.so
+    export SNS_SCENE_PLUGIN=$(cd ..; pwd)/schunk/.libs/libamino_schunk.so
 
     #Creates some ach channels specific for baxter.
     read -p "Create refs/states, define axes to remap for L/R/Head? (y/n): " make_states
