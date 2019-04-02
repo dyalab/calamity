@@ -19,4 +19,4 @@ For example, to set bit 1 send the command 0x01.
 For bit 2, send 0x02.
 For both bit 1 and bit 2, send 0x03.
 
-Page 55 contains a nice table of possible commands and importaint info.
+Page 55 contains a nice table of possible commands and important info.
