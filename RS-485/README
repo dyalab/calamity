@@ -9,7 +9,7 @@ Check out section 4.4 for what each bit recieved means.
 
 Section 4.7 describes how to send commands to set bits.
 
-IMPORTAINT INFO:
+IMPORTANT INFO:
 First register for output - 0x03E8
 First register for input - 0x07D0
 
