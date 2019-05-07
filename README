@@ -1,1 +1,16 @@
-This repo will provide a space for our group to collaborate on various aspects of the Calamity Robot.
+This repo will provide a space for our group to collaborate on various
+aspects of the Calamity Robot.
+
+The different things stored here are as follows:
+
+cal-communication - communication scripts to get the arm up and
+running
+
+point_generator - code to generate motor angles and send them across
+an SNS interface.
+
+RS-485 - General RS-485 protocol info
+
+schunk - Schunk urdfs and compiled Schunk scenegraphs
+
+sns_teleop - teleop scripts for joystick control

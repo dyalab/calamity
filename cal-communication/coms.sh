@@ -41,7 +41,7 @@ run(){
 	nodes="$nodes -n $n"
     done
 
-    exec can402 -f $dev -c ref -s state $nodes -vvvv
+    exec can402 -f $dev -c ref -s state $nodes -vvvv -R 1 -C 0
 }
 
 
