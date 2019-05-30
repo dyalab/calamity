@@ -1,0 +1,35 @@
+AC_PREREQ([2.65])
+AC_INIT([schunk-table], [1.1.0], [mschack@mines.edu])
+AM_INIT_AUTOMAKE([-Wall subdir-objects])
+AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_MACRO_DIR([m4])
+
+
+# Checks for programs.
+AC_ENABLE_SHARED
+AC_DISABLE_STATIC
+AC_USE_SYSTEM_EXTENSIONS
+AC_PROG_CC
+AC_PROG_CC_C99
+AM_PROG_AR
+AC_PROG_LIBTOOL
+
+
+AC_C_RESTRICT
+AC_C_INLINE
+AC_C_CONST
+
+## Amino ##
+PKG_CHECK_MODULES([AMINO],
+                  [amino],
+                  [HAVE_AMINO=yes])
+
+LT_INIT
+
+CFLAGS="$CFLAGS $AMINO_CFLAGS"
+LDFLAGS="$LDFLAGS $AMINO_LDFLAGS"
+
+
+AC_CONFIG_FILES([Makefile])
+
+AC_OUTPUT

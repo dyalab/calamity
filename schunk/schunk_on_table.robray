@@ -1,0 +1,193 @@
+include "table.robray"
+
+frame robot_1_joint {
+	parent robot_base_joint;
+	type revolute;
+	variable robot_1_joint;
+	axis [0.0, 0.0, -1.0];
+	offset 0.0;
+	geometry {
+		visual 0;
+		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_1_link.stl";
+		color [0.5, 0.5, 0.5];
+		alpha 1.0;
+	}
+	geometry {
+		collision 0;
+		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_1_link.stl";
+		color [0.5, 0.5, 0.5];
+		alpha 1.0;
+	}
+}
+
+frame robot_2_joint {
+	parent robot_1_joint;
+	type revolute;
+	translation [0.0, 0.0, 0.23999999463558197];
+	quaternion [-0.4999999999995983, -0.4999999999995983, -0.4999993662046025, 0.5000006337953975];
+	variable robot_2_joint;
+	axis [0.0, 0.0, -1.0];
+	offset 0.0;
+	geometry {
+		visual 0;
+		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_2_link_collision.stl";
+		color [0.5, 0.5, 0.5];
+		alpha 1.0;
+	}
+	geometry {
+		collision 0;
+		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_2_link.stl";
+		color [0.5, 0.5, 0.5];
+		alpha 1.0;
+	}
+}
+
+frame robot_3_joint {
+	parent robot_2_joint;
+	type revolute;
+	quaternion [0.4999999999995983, 0.4999993662046025, 0.4999999999995983, 0.5000006337953975];
+	variable robot_3_joint;
+	axis [0.0, 0.0, -1.0];
+	offset 0.0;
+	geometry {
+		visual 0;
+		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_3_link_collision.stl";
+		color [0.5, 0.5, 0.5];
+		alpha 1.0;
+	}
+	geometry {
+		collision 0;
+		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_3_link.stl";
+		color [0.5, 0.5, 0.5];
+		alpha 1.0;
+	}
+}
+
+frame robot_4_joint {
+	parent robot_3_joint;
+	type revolute;
+	translation [0.0, 0.0, 0.328000009059906];
+	quaternion [-0.4999999999995983, -0.4999999999995983, -0.4999993662046025, 0.5000006337953975];
+	variable robot_4_joint;
+	axis [0.0, 0.0, -1.0];
+	offset 0.0;
+	geometry {
+		visual 0;
+		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_4_link_collision.stl";
+		color [0.5, 0.5, 0.5];
+		alpha 1.0;
+	}
+	geometry {
+		collision 0;
+		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_4_link.stl";
+		color [0.5, 0.5, 0.5];
+		alpha 1.0;
+	}
+}
+
+frame robot_5_joint {
+	parent robot_4_joint;
+	type revolute;
+	quaternion [0.4999999999995983, 0.4999993662046025, 0.4999999999995983, 0.5000006337953975];
+	variable robot_5_joint;
+	axis [0.0, 0.0, -1.0];
+	offset 0.0;
+	geometry {
+		visual 0;
+		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_5_link_collision.stl";
+		color [0.5, 0.5, 0.5];
+		alpha 1.0;
+	}
+	geometry {
+		collision 0;
+		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_5_link.stl";
+		color [0.5, 0.5, 0.5];
+		alpha 1.0;
+	}
+}
+
+frame robot_6_joint {
+	parent robot_5_joint;
+	type revolute;
+	translation [0.0, 0.0, 0.3230000138282776];
+	quaternion [-0.4999999999995983, -0.4999999999995983, -0.4999993662046025, 0.5000006337953975];
+	variable robot_6_joint;
+	axis [0.0, 0.0, 1.0];
+	offset 0.0;
+	geometry {
+		visual 0;
+		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_6_link_collision.stl";
+		color [0.5, 0.5, 0.5];
+		alpha 1.0;
+	}
+	geometry {
+		collision 0;
+		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_6_link.stl";
+		color [0.5, 0.5, 0.5];
+		alpha 1.0;
+	}
+}
+
+frame robot_7_joint {
+	parent robot_6_joint;
+	type revolute;
+	quaternion [0.4999999999995983, 0.4999993662046025, 0.4999999999995983, 0.5000006337953975];
+	variable robot_7_joint;
+	axis [0.0, 0.0, 1.0];
+	offset 0.0;
+	geometry {
+		visual 0;
+		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_7_link.stl";
+		color [0.5, 0.5, 0.5];
+		alpha 1.0;
+	}
+	geometry {
+		collision 0;
+		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_7_link.stl";
+		color [0.5, 0.5, 0.5];
+		alpha 1.0;
+	}
+}
+
+frame robot_base_joint {
+	parent robot_podest_joint;
+	type fixed;
+	translation [0.0, 0.0, 0.14000000059604645];
+}
+
+frame robot_ee_joint {
+	parent robot_7_joint;
+	type fixed;
+	translation [0.0, 0.0, 0.08240000158548355];
+}
+
+frame robot_podest_joint {
+      	parent front_table;
+	type fixed;
+	geometry {
+		visual 0;
+		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_podest_link.stl";
+		color [0.5, 0.5, 0.5];
+		alpha 1.0;
+	}
+	geometry {
+		collision 0;
+		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_podest_link.stl";
+		color [0.5, 0.5, 0.5];
+		alpha 1.0;
+	}
+}
+
+frame table_base {
+    translation [20*inch,0, 0];
+    rpy [0, 0, 0];
+}
+
+frame front_table {
+    parent table_base;
+    translation [1.125, 0, 28*inch];
+    geometry {
+        isa table;
+        dimension [100*inch, 30*inch, table_size];
+    }
+}
