@@ -33,3 +33,11 @@ LDFLAGS="$LDFLAGS $AMINO_LDFLAGS"
 AC_CONFIG_FILES([Makefile])
 
 AC_OUTPUT
+
+
+AS_BOX([SCENEGRAPH CONFIGURATION SUMMARY])
+
+AC_MSG_NOTICE([cflags:            $cflags])
+AC_MSG_NOTICE([ldflags:           $ldflags])
+
+AS_BOX([END SUMMARY])

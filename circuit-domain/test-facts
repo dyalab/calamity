@@ -1,0 +1,17 @@
+
+(define (problem lamp-light) (:domain circuits)
+ (:objects wire-a wire-b wire-c wire-d - wire switch-a - switch lamp-a - lamp
+  battery-a - battery location-a location-b location-c location-d location-e
+  location-f - location location-wh location-sh location-lh - location)
+ (:init (at battery-a location-a) (at lamp-a location-e) (occupied location-e)
+  (connected location-e) (at switch-a location-c) (occupied location-c)
+  (connected location-c) (at wire-a location-wh) (occupied location-wh)
+  (connected location-wh) (at wire-b location-b) (occupied location-b)
+  (connected location-b) (at wire-c location-d) (occupied location-d)
+  (connected location-d) (at wire-d location-wh) (handempty))
+ (:goal
+  (and
+   (and (at battery-a location-a) (connected location-b)
+        (at switch-a location-c) (connected location-d) (at lamp-a location-e)
+        (connected location-f))
+   (and (handempty))))) 

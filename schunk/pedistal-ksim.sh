@@ -11,6 +11,8 @@ aarxc lwa4d.urdf -n lwa4d -s lwa4d.robray
 aarxc lwa4d.urdf -n lwa4d -o lwa4d.c
 aarxc schunk_on_table.robray -n schunk_on_table -o schunk_on_table.c
 aarxc schunk_with_table.robray -n schunk_with_table -o schunk_with_table.c
+aarxc q0.robray -n q0 -o q0.c
+aarxc goal.robray -n goal -o goal.c
 
 
 if [ ! -z "$1" ]
@@ -32,7 +34,6 @@ sns run -d -r bg-ksim -- sns-ksim -y state -u ref
 sns-teleopd -j joystick \
             -y state \
             -u ref \
-	    -v \
             -Q 4 -m "robot_1_joint,robot_2_joint,robot_3_joint,robot_4_joint" \
             -Q 5 -m "robot_5_joint,robot_6_joint,robot_7_joint" \
 	    -e "robot_ee_joint"\

@@ -1,0 +1,92 @@
+include "circuit.robray"
+include "robotiq.robray"
+
+frame table_base {
+    translation [0, 0, 0];
+    rpy [0, 0, 0];
+}
+
+frame front_table {
+    parent table_base;
+    translation [table_offset, 0, 0];
+    geometry {
+        isa table;
+        dimension [100*inch, 30*inch, table_size];
+    }
+}
+
+frame LOCATION_A {
+      parent front_table;
+      translation [10*inch - table_offset, 0, table_stack];
+      rpy [0, 0, pi/2];
+      geometry {
+      	       isa location;
+      }
+}
+
+frame LOCATION_B {
+      parent front_table;
+      translation [10*inch - table_offset + circuit_offset, circuit_offset, table_stack];
+      geometry {
+      	       isa location;
+      }
+}
+
+frame LOCATION_C {
+      parent front_table;
+      translation [10*inch - table_offset + circuit_offset + circuit_length, circuit_offset,
+      		  table_stack];
+      geometry {
+      	       isa location;
+      }
+}
+
+frame LOCATION_D {
+      parent front_table;
+      translation [10*inch - table_offset + circuit_length + circuit_offset * 2, 0, table_stack];
+      rpy [0, 0, pi/2];
+      geometry {
+      	       isa location;
+      }
+}
+
+frame LOCATION_E {
+      parent front_table;
+      translation [10*inch - table_offset + circuit_offset + circuit_length, - circuit_offset,
+      		  table_stack];
+      geometry {
+      	       isa location;
+      }
+}
+
+frame LOCATION_F {
+      parent front_table;
+      translation [10*inch - table_offset + circuit_offset, - circuit_offset, table_stack];
+      geometry {
+      	       isa location;
+      }
+}
+
+frame LOCATION_WH {
+      parent front_table;
+      translation [10*inch - table_offset, 5*inch, table_stack];
+      geometry {
+      	       isa location;
+      }
+}
+
+frame LOCATION_SH {
+      parent front_table;
+      translation [12.5*inch - table_offset, 7.5*inch, table_stack];
+      geometry {
+      	       isa location;
+      }
+}
+
+frame LOCATION_LH {
+      parent front_table;
+      translation [12.5*inch - table_offset, -7.5*inch, table_stack];
+      geometry {
+      	       isa location;
+      }
+}

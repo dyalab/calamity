@@ -1,0 +1,53 @@
+include "scene.robray"
+
+frame WIRE_A {
+      parent LOCATION_WH;
+      geometry {
+      	       isa wire;
+      }
+}
+
+
+frame WIRE_B {
+      parent LOCATION_B;
+      geometry {
+      	       isa wire;
+      }
+}
+
+
+frame WIRE_C {
+      parent LOCATION_D;
+      geometry {
+      	       isa wire;
+      }
+}
+
+
+frame WIRE_D {
+      parent LOCATION_WH;
+      geometry {
+      	       isa wire;
+      }
+}
+
+frame SWITCH_A {
+      parent LOCATION_C;
+      geometry {
+      	       isa switch;
+      }
+}
+
+frame LAMP_A {
+      parent LOCATION_E;
+      geometry {
+      	       isa lamp;
+      }
+}
+
+frame BATTERY_A {
+      parent LOCATION_A;
+      geometry {
+      	       isa battery;
+      }
+}

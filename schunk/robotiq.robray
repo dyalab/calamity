@@ -4,13 +4,13 @@ frame robotiq_gripper {
 	rpy [pi/2, 0, pi/2];
 	geometry {
 		visual 0;
-		mesh "./Robotiq-2F-140.stl";
+		mesh "./Robotiq-2F-85.stl";
 		color [0.5, 0.5, 0.5];
 		alpha 1.0;
 	}
 	geometry {
 		visual 1;
-		mesh "./Robotiq-2F-140.stl";
+		mesh "./Robotiq-2F-85.stl";
 		color [0.5, 0.5, 0.5];
 		alpha 1.0;
 	}

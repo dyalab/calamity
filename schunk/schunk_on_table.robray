@@ -1,7 +1,8 @@
 include "table.robray"
-include "lwa4d.robray"
 include "robotiq.robray"
+include "lwa4d.robray"
 
+def table_offset 1.125;
 
 frame table_base {
     translation [0, 0, 0];
@@ -10,7 +11,7 @@ frame table_base {
 
 frame front_table {
     parent table_base;
-    translation [1.125, 0, 0];
+    translation [table_offset, 0, 0];
     geometry {
         isa table;
         dimension [100*inch, 30*inch, table_size];
@@ -19,4 +20,5 @@ frame front_table {
 
 frame robot_podest_joint {
       parent front_table;
+
 }

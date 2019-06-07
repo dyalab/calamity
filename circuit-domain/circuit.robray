@@ -1,0 +1,84 @@
+def mm 1e-3;
+def cm 1e-2;
+def inch 2.54*cm;
+
+def circuit_height 0.125*inch;
+def circuit_length 2.75*inch;
+def circuit_width  0.75*inch;
+def circuit_offset circuit_length / 2 - circuit_width / 2;
+
+def table_offset 1.125;
+def table_height .05;
+def table_size 1*cm;
+
+def table_stack (circuit_height + table_size)/2 + .1*mm;
+def circuit_stack circuit_height + .1*mm;
+
+/***********/
+/* Classes */
+/***********/
+
+class moveable { }
+class stackable { }
+
+
+class red   { color [1,0,0]; }
+class green { color [0,1,0]; }
+class blue  { color [0,0,1]; }
+class grey  { color [192,192,192]; }
+
+class wire {
+      shape box;
+      isa moveable;
+      isa stackable;
+      isa blue;
+      alpha 0.5;
+      dimension [circuit_length, circuit_width, circuit_height];
+}
+
+class switch {
+      shape box;
+      isa moveable;
+      isa stackable;
+      isa green;
+      alpha 0.5;
+      dimension [circuit_length, circuit_width, circuit_height];
+}
+
+class lamp {
+      shape box;
+      isa moveable;
+      isa stackable;
+      isa red;
+      alpha 0.5;
+      dimension [circuit_length, circuit_width, circuit_height];
+}
+
+class battery {
+      shape box;
+      isa stackable;
+      isa grey;
+      alpha 0.5;
+      dimension [circuit_length, circuit_width, circuit_height];
+}
+
+class location {
+      shape box;
+      alpha 0;
+      dimension [0, 0, 0];
+}
+
+
+class table {
+    shape box;
+    isa surface;
+    color [.6, .3, .6];
+    alpha 0.5;
+}
+
+/** Grasp **/
+frame end_effector_grasp {
+    parent robotiq_gripper;
+    translation [0, 5.75*inch, 0];
+    rpy [pi/2, 0, 0];
+}
