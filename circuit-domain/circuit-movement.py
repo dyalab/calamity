@@ -103,8 +103,7 @@ def make_state(scene, configuration):
             handempty[0] = False
         else:
             conjunction.append(["AT", child, parent])
-            if ["OCCUPIED", parent] not in conjunction:
-                conjunction.append(["OCCUPIED", parent])
+            if ["CONNECTED", parent] not in conjunction:
                 conjunction.append(["CONNECTED", parent])
 
 
@@ -188,12 +187,19 @@ def place_height(scene,name):
 def op_pick_up(scene, config, op):
     obj = op[1]
     dst = op[2]
+    print("Object: "+ obj + " parent: " + scene[obj].parent + " dst: "+dst)
+    if dst != scene[obj].parent:
+        raise tm.ActionFailure("(NOT (tmsmt/pddl::AT tmsmt/pddl::"+obj+" tmsmt/pddl::"+dst+"))")
+
     nop = tm.op_nop(scene,config)
     mp = motion_plan(nop, FRAME, tm.op_tf_abs(nop,obj))
     return tm.op_reparent(mp, FRAME, obj)
 
 def op_put_down(scene, config, op):
     (a, obj, dst) = op
+    if FRAME != scene[obj].parent:
+        raise tm.ActionFailure("(NOT (tmsmt/pddl::HOLDING tmsmt/pddl::"+obj+"))")
+
     nop = tm.op_nop(scene,config)
     g_tf_d = tm.op_tf_abs(nop,dst)
     return place_tf(nop, obj, dst, g_tf_d)
@@ -207,6 +213,8 @@ tm.bind_scene_state(scene_state)
 tm.bind_goal_state(goal_state)
 tm.bind_scene_objects(scene_objects)
 tm.bind_refine_operator(op_pick_up, "PICK-UP")
-tm.bind_refine_operator(op_put_down, "PUT-DOWN")
+tm.bind_refine_operator(op_put_down, "PUT-DOWN-WIRE")
+tm.bind_refine_operator(op_put_down, "PUT-DOWN-SWITCH")
+tm.bind_refine_operator(op_put_down, "PUT-DOWN-LAMP")
 
 tm.bind_collision_constraint(collision_constraint)

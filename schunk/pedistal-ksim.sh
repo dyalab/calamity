@@ -7,12 +7,11 @@ ach mk joystick -1
 cd `dirname "$0"`
 
 # make sure the proper c files are created
+export ROS_PACKAGE_PATH=~/Git/schunk_modular_robotics
 aarxc lwa4d.urdf -n lwa4d -s lwa4d.robray
 aarxc lwa4d.urdf -n lwa4d -o lwa4d.c
 aarxc schunk_on_table.robray -n schunk_on_table -o schunk_on_table.c
 aarxc schunk_with_table.robray -n schunk_with_table -o schunk_with_table.c
-aarxc q0.robray -n q0 -o q0.c
-aarxc goal.robray -n goal -o goal.c
 
 
 if [ ! -z "$1" ]

@@ -1,0 +1,371 @@
+src/sns-tmsmt-coms.o: src/sns-tmsmt-coms.c /usr/include/stdc-predef.h \
+ config.h /usr/include/getopt.h /usr/include/ctype.h \
+ /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
+ /usr/include/x86_64-linux-gnu/bits/wordsize.h \
+ /usr/include/x86_64-linux-gnu/gnu/stubs.h \
+ /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
+ /usr/include/x86_64-linux-gnu/bits/types.h \
+ /usr/include/x86_64-linux-gnu/bits/typesizes.h /usr/include/endian.h \
+ /usr/include/x86_64-linux-gnu/bits/endian.h \
+ /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+ /usr/include/x86_64-linux-gnu/bits/byteswap-16.h /usr/include/xlocale.h \
+ /usr/include/x86_64-linux-gnu/sys/stat.h /usr/include/time.h \
+ /usr/include/x86_64-linux-gnu/bits/stat.h \
+ /usr/local/include/amino-1.0/amino.h /usr/include/assert.h \
+ /usr/include/stdlib.h /usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h \
+ /usr/include/x86_64-linux-gnu/bits/waitflags.h \
+ /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
+ /usr/include/x86_64-linux-gnu/sys/types.h \
+ /usr/include/x86_64-linux-gnu/sys/select.h \
+ /usr/include/x86_64-linux-gnu/bits/select.h \
+ /usr/include/x86_64-linux-gnu/bits/sigset.h \
+ /usr/include/x86_64-linux-gnu/bits/time.h \
+ /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
+ /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
+ /usr/lib/gcc/x86_64-linux-gnu/6/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h /usr/include/string.h \
+ /usr/include/x86_64-linux-gnu/bits/string.h \
+ /usr/include/x86_64-linux-gnu/bits/string2.h /usr/include/stdio.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /usr/lib/gcc/x86_64-linux-gnu/6/include/stdarg.h \
+ /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
+ /usr/include/x86_64-linux-gnu/bits/stdio.h /usr/include/math.h \
+ /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+ /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
+ /usr/include/x86_64-linux-gnu/bits/huge_val.h \
+ /usr/include/x86_64-linux-gnu/bits/huge_valf.h \
+ /usr/include/x86_64-linux-gnu/bits/huge_vall.h \
+ /usr/include/x86_64-linux-gnu/bits/inf.h \
+ /usr/include/x86_64-linux-gnu/bits/nan.h \
+ /usr/include/x86_64-linux-gnu/bits/mathdef.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
+ /usr/include/x86_64-linux-gnu/bits/mathinline.h /usr/include/errno.h \
+ /usr/include/x86_64-linux-gnu/bits/errno.h /usr/include/linux/errno.h \
+ /usr/include/x86_64-linux-gnu/asm/errno.h \
+ /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
+ /usr/local/include/amino-1.0/amino/cblas_order.h /usr/include/cblas.h \
+ /usr/include/cblas_mangling.h /usr/include/x86_64-linux-gnu/bits/timex.h \
+ /usr/local/include/amino-1.0/amino/mem.h \
+ /usr/local/include/amino-1.0/amino/math.h \
+ /usr/local/include/amino-1.0/amino/la.h \
+ /usr/local/include/amino-1.0/amino/la_impl.h \
+ /usr/local/include/amino-1.0/amino/def.h \
+ /usr/local/include/amino-1.0/amino/mangle.h \
+ /usr/local/include/amino-1.0/amino/undef.h \
+ /usr/local/include/amino-1.0/amino/tf.h \
+ /usr/local/include/amino-1.0/amino/mat.h \
+ /usr/lib/gcc/x86_64-linux-gnu/6/include/float.h \
+ /usr/local/include/amino-1.0/amino/lapack.h \
+ /usr/local/include/amino-1.0/amino/lapack_impl.h \
+ /usr/local/include/amino-1.0/amino/clapack.h \
+ /usr/local/include/amino-1.0/amino/clapack_impl.h \
+ /usr/local/include/amino-1.0/amino/time.h \
+ /usr/local/include/amino-1.0/amino/debug.h \
+ /usr/local/include/amino-1.0/amino/plot.h \
+ /usr/local/include/amino-1.0/amino/kin.h \
+ /usr/local/include/amino-1.0/amino/type.h \
+ /usr/local/include/amino-1.0/amino/endconv.h \
+ /usr/local/include/amino-1.0/amino/unit.h \
+ /usr/local/include/amino-1.0/amino/validate.h \
+ /usr/local/include/amino-1.0/amino/io.h \
+ /usr/local/include/amino-1.0/amino/cv.h \
+ /usr/local/include/amino-1.0/amino/const.h \
+ /usr/local/include/amino-1.0/amino/heap.h /usr/local/include/ach.h \
+ /usr/include/signal.h /usr/include/x86_64-linux-gnu/bits/signum.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo.h \
+ /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+ /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+ /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+ /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+ /usr/include/x86_64-linux-gnu/bits/sigthread.h \
+ /usr/local/include/ach/generic.h /usr/local/include/tmplan.h \
+ /usr/local/include/amino-1.0/amino/rx/scenegraph.h \
+ /usr/local/include/amino-1.0/amino/mat.h \
+ /usr/local/include/amino-1.0/amino/rx/rxtype.h \
+ /usr/local/include/amino-1.0/amino/ct/state.h \
+ /usr/local/include/amino-1.0/amino/ct/traj.h \
+ /usr/local/include/amino-1.0/amino/ct/state.h /usr/local/include/sns.h \
+ /usr/include/pthread.h /usr/include/sched.h \
+ /usr/include/x86_64-linux-gnu/bits/sched.h \
+ /usr/include/x86_64-linux-gnu/bits/setjmp.h /usr/include/fcntl.h \
+ /usr/include/x86_64-linux-gnu/bits/fcntl.h \
+ /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
+ /usr/include/x86_64-linux-gnu/bits/uio.h /usr/include/syslog.h \
+ /usr/include/x86_64-linux-gnu/sys/syslog.h \
+ /usr/include/x86_64-linux-gnu/bits/syslog-path.h \
+ /usr/local/include/sns/util.h /usr/local/include/sns/msg.h \
+ /usr/local/include/sns/daemon.h /usr/local/include/sns/path.h \
+ /usr/local/include/sns/msg.h /usr/local/include/sns/sdh_tactile.h \
+ /usr/local/include/sns/motor.h /usr/local/include/sns/event.h \
+ /usr/local/include/ach/experimental.h
+
+/usr/include/stdc-predef.h:
+
+config.h:
+
+/usr/include/getopt.h:
+
+/usr/include/ctype.h:
+
+/usr/include/features.h:
+
+/usr/include/x86_64-linux-gnu/sys/cdefs.h:
+
+/usr/include/x86_64-linux-gnu/bits/wordsize.h:
+
+/usr/include/x86_64-linux-gnu/gnu/stubs.h:
+
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
+
+/usr/include/x86_64-linux-gnu/bits/types.h:
+
+/usr/include/x86_64-linux-gnu/bits/typesizes.h:
+
+/usr/include/endian.h:
+
+/usr/include/x86_64-linux-gnu/bits/endian.h:
+
+/usr/include/x86_64-linux-gnu/bits/byteswap.h:
+
+/usr/include/x86_64-linux-gnu/bits/byteswap-16.h:
+
+/usr/include/xlocale.h:
+
+/usr/include/x86_64-linux-gnu/sys/stat.h:
+
+/usr/include/time.h:
+
+/usr/include/x86_64-linux-gnu/bits/stat.h:
+
+/usr/local/include/amino-1.0/amino.h:
+
+/usr/include/assert.h:
+
+/usr/include/stdlib.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h:
+
+/usr/include/x86_64-linux-gnu/bits/waitflags.h:
+
+/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
+
+/usr/include/x86_64-linux-gnu/sys/types.h:
+
+/usr/include/x86_64-linux-gnu/sys/select.h:
+
+/usr/include/x86_64-linux-gnu/bits/select.h:
+
+/usr/include/x86_64-linux-gnu/bits/sigset.h:
+
+/usr/include/x86_64-linux-gnu/bits/time.h:
+
+/usr/include/x86_64-linux-gnu/sys/sysmacros.h:
+
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
+
+/usr/include/alloca.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/6/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
+
+/usr/include/string.h:
+
+/usr/include/x86_64-linux-gnu/bits/string.h:
+
+/usr/include/x86_64-linux-gnu/bits/string2.h:
+
+/usr/include/stdio.h:
+
+/usr/include/libio.h:
+
+/usr/include/_G_config.h:
+
+/usr/include/wchar.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/6/include/stdarg.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
+
+/usr/include/x86_64-linux-gnu/bits/sys_errlist.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdio.h:
+
+/usr/include/math.h:
+
+/usr/include/x86_64-linux-gnu/bits/math-vector.h:
+
+/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
+
+/usr/include/x86_64-linux-gnu/bits/huge_val.h:
+
+/usr/include/x86_64-linux-gnu/bits/huge_valf.h:
+
+/usr/include/x86_64-linux-gnu/bits/huge_vall.h:
+
+/usr/include/x86_64-linux-gnu/bits/inf.h:
+
+/usr/include/x86_64-linux-gnu/bits/nan.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathdef.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathinline.h:
+
+/usr/include/errno.h:
+
+/usr/include/x86_64-linux-gnu/bits/errno.h:
+
+/usr/include/linux/errno.h:
+
+/usr/include/x86_64-linux-gnu/asm/errno.h:
+
+/usr/include/asm-generic/errno.h:
+
+/usr/include/asm-generic/errno-base.h:
+
+/usr/local/include/amino-1.0/amino/cblas_order.h:
+
+/usr/include/cblas.h:
+
+/usr/include/cblas_mangling.h:
+
+/usr/include/x86_64-linux-gnu/bits/timex.h:
+
+/usr/local/include/amino-1.0/amino/mem.h:
+
+/usr/local/include/amino-1.0/amino/math.h:
+
+/usr/local/include/amino-1.0/amino/la.h:
+
+/usr/local/include/amino-1.0/amino/la_impl.h:
+
+/usr/local/include/amino-1.0/amino/def.h:
+
+/usr/local/include/amino-1.0/amino/mangle.h:
+
+/usr/local/include/amino-1.0/amino/undef.h:
+
+/usr/local/include/amino-1.0/amino/tf.h:
+
+/usr/local/include/amino-1.0/amino/mat.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/6/include/float.h:
+
+/usr/local/include/amino-1.0/amino/lapack.h:
+
+/usr/local/include/amino-1.0/amino/lapack_impl.h:
+
+/usr/local/include/amino-1.0/amino/clapack.h:
+
+/usr/local/include/amino-1.0/amino/clapack_impl.h:
+
+/usr/local/include/amino-1.0/amino/time.h:
+
+/usr/local/include/amino-1.0/amino/debug.h:
+
+/usr/local/include/amino-1.0/amino/plot.h:
+
+/usr/local/include/amino-1.0/amino/kin.h:
+
+/usr/local/include/amino-1.0/amino/type.h:
+
+/usr/local/include/amino-1.0/amino/endconv.h:
+
+/usr/local/include/amino-1.0/amino/unit.h:
+
+/usr/local/include/amino-1.0/amino/validate.h:
+
+/usr/local/include/amino-1.0/amino/io.h:
+
+/usr/local/include/amino-1.0/amino/cv.h:
+
+/usr/local/include/amino-1.0/amino/const.h:
+
+/usr/local/include/amino-1.0/amino/heap.h:
+
+/usr/local/include/ach.h:
+
+/usr/include/signal.h:
+
+/usr/include/x86_64-linux-gnu/bits/signum.h:
+
+/usr/include/x86_64-linux-gnu/bits/siginfo.h:
+
+/usr/include/x86_64-linux-gnu/bits/sigaction.h:
+
+/usr/include/x86_64-linux-gnu/bits/sigcontext.h:
+
+/usr/include/x86_64-linux-gnu/bits/sigstack.h:
+
+/usr/include/x86_64-linux-gnu/sys/ucontext.h:
+
+/usr/include/x86_64-linux-gnu/bits/sigthread.h:
+
+/usr/local/include/ach/generic.h:
+
+/usr/local/include/tmplan.h:
+
+/usr/local/include/amino-1.0/amino/rx/scenegraph.h:
+
+/usr/local/include/amino-1.0/amino/mat.h:
+
+/usr/local/include/amino-1.0/amino/rx/rxtype.h:
+
+/usr/local/include/amino-1.0/amino/ct/state.h:
+
+/usr/local/include/amino-1.0/amino/ct/traj.h:
+
+/usr/local/include/amino-1.0/amino/ct/state.h:
+
+/usr/local/include/sns.h:
+
+/usr/include/pthread.h:
+
+/usr/include/sched.h:
+
+/usr/include/x86_64-linux-gnu/bits/sched.h:
+
+/usr/include/x86_64-linux-gnu/bits/setjmp.h:
+
+/usr/include/fcntl.h:
+
+/usr/include/x86_64-linux-gnu/bits/fcntl.h:
+
+/usr/include/x86_64-linux-gnu/bits/fcntl-linux.h:
+
+/usr/include/x86_64-linux-gnu/bits/uio.h:
+
+/usr/include/syslog.h:
+
+/usr/include/x86_64-linux-gnu/sys/syslog.h:
+
+/usr/include/x86_64-linux-gnu/bits/syslog-path.h:
+
+/usr/local/include/sns/util.h:
+
+/usr/local/include/sns/msg.h:
+
+/usr/local/include/sns/daemon.h:
+
+/usr/local/include/sns/path.h:
+
+/usr/local/include/sns/msg.h:
+
+/usr/local/include/sns/sdh_tactile.h:
+
+/usr/local/include/sns/motor.h:
+
+/usr/local/include/sns/event.h:
+
+/usr/local/include/ach/experimental.h:

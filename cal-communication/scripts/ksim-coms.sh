@@ -1,27 +1,20 @@
 #!/bin/bash
 
-export ROS_PACKAGE_PATH=/home/mschack/Git/schunk_modular_robotics/
-
 cd `dirname "$0"`
-cd ../schunk
-echo "cding into schunk to make compiled scenegraph"
-aarxc lwa4d.urdf -n lwa4d -s lwa4d.robray
-aarxc lwa4d.urdf -n lwa4d -o lwa4d.c
-aarxc schunk_on_table.robray -n schunk_on_table -o schunk_on_table.c
-aarxc schunk_with_table.robray -n schunk_with_table -o schunk_with_table.c
-aarxc q0.robray -n q0 -o q0.c
-aarxc goal.robray -n goal -o goal.c
-make
+../../schunk/create-scenegraphs.sh
 
-export SNS_SCENE_NAME=schunk_on_table
-export SNS_SCENE_PLUGIN=`pwd`/.libs/schunk_on_table.so
+export ROS_PACKAGE_PATH=/home/mschack/Git/schunk_modular_robotics/
+export SNS_SCENE_NAME=circuit
 
-echo "cding into circuit domain to run SNS and planner"
-cd ../circuit-domain
+cd ../../schunk
+export SNS_SCENE_PLUGIN=`pwd`/.libs/q0.so
+
+echo "cding into test to run SNS and planner"
 
 ach mk ref -1
 ach mk state -1
-ach mk points -1
+ach mk reparent -1
+ach mk action -1
 
 echo "starting SNS"
 
@@ -33,13 +26,22 @@ else
     sns start
 fi
 
-sns run -d -r bg-ksim -- sns-ksim -y state -u ref
-sns run -d -r sns-amino-ctrl -- sns-amino-ctrl -y state -u ref -p points
+cd ../test
+plan_file=`pwd`/coms-plan.tmp
+
+sns run -d -r bg-ksim -- sns-ksim -y state -u ref -r reparent
+sns run -d -r sns-amino-ctrl --\
+    sns_tmsmt_coms -y state -u ref -p $plan_file -a action -r reparent
+
+cd ../circuit-domain
 
 
-export TMSMT_COMMUNICATION=cal-coms::communication
+export TMSMT_COMMUNICATION=cal-coms::write-file
+export TMSMT_SCENE_UPDATE=cal-coms::read-new-scene
+export TMSMT_INITIALIZE=cal-coms::initialize
 export TMSMT_LISP_ARGS="--eval '(require :cal-coms)'"
 export TMSMT_NO_CORE=t
+export TMSMT_OPT="(:max-steps . 10)(:trace . nil)(:state-change-func . cal-coms::read-action-channel)"
 
 if [ $1 ]; then
     export TMSMT_PLANNER=default-probabilistic-cpdl-plan
@@ -51,8 +53,8 @@ if [ $1 ]; then
 	  circuit-movement.py \
 	  -g scene.robray \
 	  -q q0.tmp \
-	  --gui\
-	  -v
+	  -v\
+	  -o ../test/plan.tmp
 else
     export TMSMT_PLANNER=default-cpdl-plan
     tmsmt ~/Git/calamity/schunk/lwa4d_robot.urdf \
@@ -65,9 +67,13 @@ else
 	  -q q0.tmp \
 	  --write-facts=test-facts\
 	  --gui\
-	  -v
+	  -v\
+	  -o ../test/plan.tmp
 fi
 
 sns kill sns-amino-ctrl
 sns kill bg-ksim
+
+cd ../test
+rm coms-plan.tmp
 # sns stop

@@ -1,4 +1,5 @@
 include "scene.robray"
+include "robotiq.robray"
 
 frame WIRE_A {
       parent LOCATION_WH;
@@ -7,9 +8,8 @@ frame WIRE_A {
       }
 }
 
-
 frame WIRE_B {
-      parent LOCATION_B;
+      parent LOCATION_WH;
       geometry {
       	       isa wire;
       }
@@ -17,7 +17,7 @@ frame WIRE_B {
 
 
 frame WIRE_C {
-      parent LOCATION_D;
+      parent LOCATION_WH;
       geometry {
       	       isa wire;
       }
@@ -31,15 +31,17 @@ frame WIRE_D {
       }
 }
 
+
 frame SWITCH_A {
-      parent LOCATION_C;
+      parent LOCATION_SH;
       geometry {
       	       isa switch;
       }
 }
 
+
 frame LAMP_A {
-      parent LOCATION_E;
+      parent LOCATION_LH;
       geometry {
       	       isa lamp;
       }

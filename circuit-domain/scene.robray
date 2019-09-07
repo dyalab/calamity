@@ -1,5 +1,5 @@
 include "circuit.robray"
-include "robotiq.robray"
+
 
 frame table_base {
     translation [0, 0, 0];
@@ -11,8 +11,38 @@ frame front_table {
     translation [table_offset, 0, 0];
     geometry {
         isa table;
-        dimension [100*inch, 30*inch, table_size];
+        dimension [50*inch, 30*inch, table_size];
     }
+}
+
+frame back-wall{
+      parent front_table;
+      translation [-table_offset - 5*inch,0,25*inch];
+      rpy [0,pi/2,0];
+      geometry {
+      	       isa wall;
+      	       dimension [50*inch, 30*inch, table_size];
+      }
+}
+
+frame side-wall{
+      parent front_table;
+      translation [-table_offset,-15*inch,25*inch];
+      rpy [0,pi/2,pi/2];
+      geometry {
+      	       isa wall;
+      	       dimension [50*inch, 30*inch, table_size];
+      }
+}
+
+frame front-wall{
+      parent front_table;
+      translation [-table_offset,15*inch,25*inch];
+      rpy [0,pi/2,pi/2];
+      geometry {
+      	       isa wall;
+      	       dimension [50*inch, 30*inch, table_size];
+      }
 }
 
 frame LOCATION_A {
@@ -66,6 +96,7 @@ frame LOCATION_F {
       	       isa location;
       }
 }
+
 
 frame LOCATION_WH {
       parent front_table;

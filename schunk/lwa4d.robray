@@ -7,13 +7,13 @@ frame robot_1_joint {
 	geometry {
 		visual 0;
 		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_1_link.stl";
-		color [0.5, 0.5, 0.5];
+		color [0.0, 0.0, 0.0];
 		alpha 1.0;
 	}
 	geometry {
 		collision 0;
 		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_1_link.stl";
-		color [0.5, 0.5, 0.5];
+		color [0.0, 0.0, 0.0];
 		alpha 1.0;
 	}
 }
@@ -29,13 +29,13 @@ frame robot_2_joint {
 	geometry {
 		visual 0;
 		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_2_link_collision.stl";
-		color [0.5, 0.5, 0.5];
+		color [0.0, 0.0, 0.0];
 		alpha 1.0;
 	}
 	geometry {
 		collision 0;
 		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_2_link.stl";
-		color [0.5, 0.5, 0.5];
+		color [0.0, 0.0, 0.0];
 		alpha 1.0;
 	}
 }
@@ -50,13 +50,13 @@ frame robot_3_joint {
 	geometry {
 		visual 0;
 		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_3_link_collision.stl";
-		color [0.5, 0.5, 0.5];
+		color [0.0, 0.0, 0.0];
 		alpha 1.0;
 	}
 	geometry {
 		collision 0;
 		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_3_link.stl";
-		color [0.5, 0.5, 0.5];
+		color [0.0, 0.0, 0.0];
 		alpha 1.0;
 	}
 }
@@ -72,13 +72,13 @@ frame robot_4_joint {
 	geometry {
 		visual 0;
 		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_4_link_collision.stl";
-		color [0.5, 0.5, 0.5];
+		color [0.0, 0.0, 0.0];
 		alpha 1.0;
 	}
 	geometry {
 		collision 0;
 		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_4_link.stl";
-		color [0.5, 0.5, 0.5];
+		color [0.0, 0.0, 0.0];
 		alpha 1.0;
 	}
 }
@@ -93,13 +93,13 @@ frame robot_5_joint {
 	geometry {
 		visual 0;
 		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_5_link_collision.stl";
-		color [0.5, 0.5, 0.5];
+		color [0.0, 0.0, 0.0];
 		alpha 1.0;
 	}
 	geometry {
 		collision 0;
 		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_5_link.stl";
-		color [0.5, 0.5, 0.5];
+		color [0.0, 0.0, 0.0];
 		alpha 1.0;
 	}
 }
@@ -115,13 +115,13 @@ frame robot_6_joint {
 	geometry {
 		visual 0;
 		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_6_link_collision.stl";
-		color [0.5, 0.5, 0.5];
+		color [0.0, 0.0, 0.0];
 		alpha 1.0;
 	}
 	geometry {
 		collision 0;
 		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_6_link.stl";
-		color [0.5, 0.5, 0.5];
+		color [0.0, 0.0, 0.0];
 		alpha 1.0;
 	}
 }
@@ -136,13 +136,13 @@ frame robot_7_joint {
 	geometry {
 		visual 0;
 		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_7_link.stl";
-		color [0.5, 0.5, 0.5];
+		color [0.0, 0.0, 0.0];
 		alpha 1.0;
 	}
 	geometry {
 		collision 0;
 		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_7_link.stl";
-		color [0.5, 0.5, 0.5];
+		color [0.0, 0.0, 0.0];
 		alpha 1.0;
 	}
 }
@@ -164,13 +164,13 @@ frame robot_podest_joint {
 	geometry {
 		visual 0;
 		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_podest_link.stl";
-		color [0.5, 0.5, 0.5];
+		color [0.0, 0.0, 0.0];
 		alpha 1.0;
 	}
 	geometry {
 		collision 0;
 		mesh "/home/mschack/Git/schunk_modular_robotics/schunk_description/meshes/lwa4d/arm_podest_link.stl";
-		color [0.5, 0.5, 0.5];
+		color [0.0, 0.0, 0.0];
 		alpha 1.0;
 	}
 }

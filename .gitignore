@@ -17,6 +17,16 @@
 *.sub
 *.c.h
 *ar-lib
+*.cache
+*.tmp
+*configure
+*compile
+*libtool
+*missing
+*depcomp
+*install-sh
+*stamp-h1
+*ltmain.sh
 
 schunk/*.c
 schunk/autom4te.cache/*
@@ -28,3 +38,8 @@ schunk/libtool
 schunk/ltmain.sh
 schunk/missing
 schunk/stamp-h1
+
+cal-communication/sns_tmsmt_coms
+
+test/
+util/
