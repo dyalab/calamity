@@ -9,7 +9,7 @@ run(){
     echo "Initalizing CAN device..."
     up=$(ip link | grep $1 | grep UP)
     if [ -z "$up" ]; then
-	sudo ip link set dev $1 up type can bitrate 500000
+	sudo ip link set $1 up type can bitrate 500000
 	echo "CAN device created"
     else
 	echo "CAN device already created"

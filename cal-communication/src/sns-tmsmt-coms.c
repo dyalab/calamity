@@ -202,11 +202,11 @@ int main(int argc, char **argv){
 
   for(size_t i=0; i< n_q; i++){
     min_q[i] = -M_PI/2;
-    min_dq[i] = -1;
-    min_ddq[i] = -.5;
+    min_dq[i] = -0.25;
+    min_ddq[i] = -0.5;
     max_q[i] = M_PI/2;
-    max_dq[i] = 1;
-    max_ddq[i] = .5;
+    max_dq[i] = 0.25;
+    max_ddq[i] = 0.5;
   }
 
   struct aa_ct_state min;
