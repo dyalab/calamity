@@ -388,12 +388,12 @@ static void parse_operation(struct tmplan_op *op_, struct cx *cx){
     size_t size = tmplan_op_motion_plan_path_size( op );
     size_t n_points = size / n_q;
 
-    if(n_points == 1) goto RECURSE;
+    if(n_points == 0) goto RECURSE;
 
     struct aa_ct_pt_list *pt_list = aa_ct_pt_list_create(cx->reg);
     aa_ct_pt_list_add_q(pt_list,n_q,cx->state_set->state->q);
 
-    for ( size_t i = 1; i < n_points; i++){
+    for ( size_t i = 0; i < n_points; i++){
       aa_ct_pt_list_add_q(pt_list, n_q, &points[i*n_q]);
       SNS_LOG(LOG_DEBUG, "Added point: ");
       for (size_t j=0; j < n_q; j++){
@@ -404,7 +404,7 @@ static void parse_operation(struct tmplan_op *op_, struct cx *cx){
 
     if(cx->seg_list) reset_list(cx);
 
-    cx->seg_list = aa_ct_tjq_trap_generate(cx->reg, pt_list, cx->limit);
+    cx->seg_list = aa_ct_tjq_lin_generate(cx->reg, pt_list, cx->limit);
     aa_ct_pt_list_destroy(pt_list);
 
     clock_gettime(ACH_DEFAULT_CLOCK, &cx->cur_time);
