@@ -29,7 +29,7 @@ fi
 cd ../test
 plan_file=`pwd`/coms-plan.tmp
 
-sns run -d -r bg-ksim -- sns-ksim -y state -u ref -r reparent
+sns run -d -r bg-ksim -- sns-ksim -y state -u ref
 sns run -d -r sns-amino-ctrl --\
     sns_tmsmt_coms -y state -u ref -p $plan_file -a action -r reparent
 
