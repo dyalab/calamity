@@ -4,8 +4,11 @@
 #Author: Matthew Schack
 
 
+stateChan="realState"
+refChan="realRef"
 
 run(){
+
     echo "Initalizing CAN device..."
     up=$(ip link | grep $1 | grep UP)
     if [ -z "$up" ]; then
@@ -17,17 +20,17 @@ run(){
 
     echo "Creating ach channels if they don't exist"
 
-    ach mk ref -1
-    ach mk state -1
+    ach mk $refChan -1
+    ach mk $stateChan -1
 
     echo "starting SNS"
 
-    sns=$(sns ls | grep DEAD)
+    sns=$(sns ls | grep -v DEAD)
 
     if [ -z "$sns" ]; then
-	echo "SNS already started."
-    else
 	sns start
+    else
+	echo "SNS already started."
     fi
 
     echo "Running CAN402"
@@ -40,8 +43,15 @@ run(){
     do
 	nodes="$nodes -n $n"
     done
+    while [ ! -z "$nodes" ]
+    do
+	sleep 1
+    done
 
-    exec can402 -f $dev -c ref -s state $nodes -vvvv -R 1 -C 0
+    exec can402 -f $dev -c $refChan -s $stateChan $nodes -vvvv -R 1 -C 0
+
+
+
 }
 
 
