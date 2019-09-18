@@ -28,6 +28,8 @@
 *install-sh
 *stamp-h1
 *ltmain.sh
+*.deps
+*.dirstamp
 
 schunk/*.c
 schunk/autom4te.cache/*
