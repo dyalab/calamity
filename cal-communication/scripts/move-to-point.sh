@@ -16,13 +16,14 @@ cd `dirname "$0"`
 startFile=`pwd`/start.tmp
 planFile=`pwd`/plan.tmp
 
-
 ./coms.sh 3 4 5 6 7 8 9 &
 comsPID=$!
 
 touch $startFile
 rm $startFile
 touch $startFile
+
+
 snsdump $realStateChan motor_state -s >> $startFile
 sed 's/\t/ /g' $startFile >> $startFile
 
@@ -33,6 +34,7 @@ for point in `tail -1 $startFile`; do
 done
 
 echo $startPoint
+
 touch $planFile
 rm $planFile
 touch $planFile
@@ -51,7 +53,6 @@ ach mk -1 action
 ach mk -1 change
 ach mk -1 state
 ach mk -1 ref
-
 
 echo "Simulating movement . . ."
 sns run -d -r bg-ksim -- sns-ksim -y $simStateChan -u $simRefChan
