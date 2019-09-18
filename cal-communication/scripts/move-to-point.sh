@@ -1,4 +1,12 @@
+#!/bin/bash
+
+trap "kill 0" EXIT 		# Kill background processes if bash window is killed
+
 goalPoint="$@"
+realStateChan="realState"
+realRefChan="realRef"
+simStateChan="state"
+simRefChan="ref"
 
 firstLine="m robot_7_joint robot_6_joint robot_5_joint robot_4_joint robot_3_joint robot_2_joint robot_1_joint"
 
@@ -9,16 +17,22 @@ startFile=`pwd`/start.tmp
 planFile=`pwd`/plan.tmp
 
 
-gnome-terminal -x ./coms.sh 3 4 5 6 7 8 9
+./coms.sh 3 4 5 6 7 8 9 &
+comsPID=$!
 
 touch $startFile
 rm $startFile
 touch $startFile
-snsdump realState motor_ref -s >> $startFile
+snsdump $realStateChan motor_state -s >> $startFile
 sed 's/\t/ /g' $startFile >> $startFile
 
-startPoint=`tail -1 $startFile`
+startPoint=""
+for point in `tail -1 $startFile`; do
+    p=`echo $point | grep -o -E '[0-9.-]+'| head -1` # Grab the first number
+    startPoint="$startPoint $p"
+done
 
+echo $startPoint
 touch $planFile
 rm $planFile
 touch $planFile
@@ -38,4 +52,18 @@ ach mk -1 change
 ach mk -1 state
 ach mk -1 ref
 
-sns_tmsmt_coms -y state -u ref -a action -c change -vv -p $planFile
+
+echo "Simulating movement . . ."
+sns run -d -r bg-ksim -- sns-ksim -y $simStateChan -u $simRefChan
+snsref $simRefChan -p $startPoint
+
+sns_tmsmt_coms -y $simStateChan -u $simRefChan -a action -c change -p $planFile -o
+echo "Is it safe to run on a real robot? (y/n)"
+read ans
+
+sns kill bg-ksim
+if [ $ans == "y" ]; then
+    sns_tmsmt_coms -y $realStateChan -u $realRefChan -a action -c change -p $planFile -o
+fi
+
+kill $comsPID

@@ -84,6 +84,8 @@ struct cx {
 
   struct aa_mem_region* reg;
   struct aa_ct_limit* limit;
+
+  int only_one;
 };
 
 
@@ -102,8 +104,8 @@ int main(int argc, char **argv){
     *opt_action_channel=NULL;
 
 
-  int c = 0;
-  while( (c = getopt( argc, argv, "a:u:y:e:h?f:p:c:" SNS_OPTSTRING)) != -1 ) {
+  int c = 0, opt_only_one=0;
+  while( (c = getopt( argc, argv, "a:u:y:e:h?f:p:c:o" SNS_OPTSTRING)) != -1 ) {
     switch(c) {
       SNS_OPTCASES_VERSION("sns-amino-controller",
 			   "Copyright (c) 2019, Colorado School of Mines\n",
@@ -128,6 +130,9 @@ int main(int argc, char **argv){
       break;
     case 'e':
       opt_end_effector = optarg;
+      break;
+    case 'o':
+      opt_only_one=1;
       break;
     case '?':   /* help     */
     case 'h':
@@ -269,6 +274,8 @@ int main(int argc, char **argv){
     cx.file_mod_time = dummy_time;
   }
 
+  cx.only_one = opt_only_one;
+
   /* Loop through points and send the interpolation */
   enum ach_status r = sns_evhandle(cx.handlers,handler_count,
 				   &sleep_dur, send_interp, &cx,
@@ -314,6 +321,9 @@ enum ach_status send_interp(void *cx_){
     struct tmplan_op *op = tmplan_remove_first(cx->plan);
     parse_operation(op, cx);
   }
+
+  /* Quit if we only want to move one plan instance and we've completed it */
+  if (!cx->seg_list && cx->only_one) {sns_cx.shutdown=1; return ACH_CANCELED;}
 
   /* Don't do anything if we don't know where to go */
   if ( !cx->seg_list ) return ACH_OK;
