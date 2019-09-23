@@ -2,6 +2,7 @@
 
 trap "kill 0" EXIT 		# Kill background processes if bash window is killed
 
+com="$1"
 goalPoint="$@"
 realStateChan="realState"
 realRefChan="realRef"
@@ -16,7 +17,7 @@ cd `dirname "$0"`
 startFile=`pwd`/start.tmp
 planFile=`pwd`/plan.tmp
 
-./coms.sh 3 4 5 6 7 8 9 &
+./coms.sh $1 3 4 5 6 7 8 9 &
 comsPID=$!
 
 touch $startFile
