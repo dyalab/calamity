@@ -56,7 +56,7 @@ ach mk -1 ref
 
 echo "Simulating movement . . ."
 sns run -d -r bg-ksim -- sns-ksim -y $simStateChan -u $simRefChan
-snsref $simRefChan -p $startPoint
+snsref $simRefChan -p -- $startPoint
 
 sns_tmsmt_coms -y $simStateChan -u $simRefChan -a action -c change -p $planFile -o
 echo "Is it safe to run on a real robot? (y/n)"
