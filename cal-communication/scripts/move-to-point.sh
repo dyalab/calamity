@@ -62,12 +62,12 @@ ach mk -1 ref
 # snsref $simRefChan -p -- $startPoint
 
 # sns_tmsmt_coms -y $simStateChan -u $simRefChan -a action -c change -p $planFile -o -vvvvv
-# echo "Is it safe to run on a real robot? (y/n)"
-# read ans
+echo "Is it safe to run on a real robot? (y/n)"
+read ans
 
-# sns kill bg-ksim
-# if [ $ans == "y" ]; then
+sns kill bg-ksim
+if [ $ans == "y" ]; then
     sns_tmsmt_coms -y $realStateChan -u $realRefChan -a action -c change -p $planFile -o
-# fi
+fi
 
 kill $comsPID
