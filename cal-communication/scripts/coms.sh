@@ -12,10 +12,10 @@ run(){
     echo "Initalizing CAN device..."
     up=$(ip link | grep $1 | grep UP)
     if [ -z "$up" ]; then
-	sudo ip link set $1 up type can bitrate 500000
-	echo "CAN device created"
+    	sudo ip link set $1 up type can bitrate 500000
+    	echo "CAN device created"
     else
-	echo "CAN device already created"
+    	echo "CAN device already created"
     fi
 
     echo "Creating ach channels if they don't exist"
@@ -43,10 +43,10 @@ run(){
     do
 	nodes="$nodes -n $n"
     done
-    while [ ! -z "$nodes" ]
-    do
-	sleep 1
-    done
+    # while [ ! -z "$nodes" ]
+    # do
+    # 	sleep 1
+    # done
 
     exec can402 -f $dev -c $refChan -s $stateChan $nodes -vvvv -R 1 -C 0
 

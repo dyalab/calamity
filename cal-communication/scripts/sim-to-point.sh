@@ -2,8 +2,8 @@
 
 trap "kill 0" EXIT 		# Kill background processes if bash window is killed
 
-com="coms0"
-goalPoint=$@
+com="$1"
+goalPoint="$@"
 realStateChan="realState"
 realRefChan="realRef"
 simStateChan="state"
@@ -17,8 +17,7 @@ cd `dirname "$0"`
 startFile=`pwd`/start.tmp
 planFile=`pwd`/plan.tmp
 
-echo "Com is: $com"
-./coms.sh $com 3 4 5 6 7 8 9 &
+./coms.sh $1 3 4 5 6 7 8 9 &
 comsPID=$!
 
 touch $startFile
@@ -35,7 +34,7 @@ for point in `tail -1 $startFile`; do
     startPoint="$startPoint $p"
 done
 
-echo "Starting at: $startPoint"
+echo $startPoint
 
 touch $planFile
 rm $planFile
@@ -44,7 +43,6 @@ touch $planFile
 echo $firstLine >> $planFile
 echo "p $startPoint" >> $planFile
 echo "p $goalPoint" >> $planFile
-echo "Goal point: $goalPoint"
 
 export ROS_PACKAGE_PATH=/home/mschack/Git/schunk_modular_robotics/
 export SNS_SCENE_NAME=schunk_on_table
@@ -57,17 +55,17 @@ ach mk -1 change
 ach mk -1 state
 ach mk -1 ref
 
-# echo "Simulating movement . . ."
-# sns run -d -r bg-ksim -- sns-ksim -y $simStateChan -u $simRefChan
-# snsref $simRefChan -p -- $startPoint
+echo "Simulating movement . . ."
+sns run -d -r bg-ksim -- sns-ksim -y $simStateChan -u $simRefChan
+snsref $simRefChan -p -- $startPoint
 
-# sns_tmsmt_coms -y $simStateChan -u $simRefChan -a action -c change -p $planFile -o -vvvvv
-# echo "Is it safe to run on a real robot? (y/n)"
-# read ans
+sns_tmsmt_coms -y $simStateChan -u $simRefChan -a action -c change -p $planFile -o
+echo "Is it safe to run on a real robot? (y/n)"
+read ans
 
-# sns kill bg-ksim
-# if [ $ans == "y" ]; then
+sns kill bg-ksim
+if [ $ans == "y" ]; then
     sns_tmsmt_coms -y $realStateChan -u $realRefChan -a action -c change -p $planFile -o
-# fi
+fi
 
 kill $comsPID
