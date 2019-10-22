@@ -95,7 +95,7 @@ static void send_action(struct cx *cx);
 enum ach_status send_interp(void *cx_);
 static void parse_operation(struct tmplan_op *op, struct cx *cx);
 
-double opt_frequency = 10;
+double opt_frequency = 500000;
 const double epsilon = 0.000001;
 
 int main(int argc, char **argv){
@@ -340,28 +340,26 @@ enum ach_status send_interp(void *cx_){
   /* interpolate */
   int r = aa_ct_seg_list_eval(cx->seg_list,cx->state_ref,cx->t);
 
-  double kp = 10; //TODO: make this not a magic number
+  double kp = 1; //TODO: make this not a magic number
   int h = 1; //check to see if we should just send the halt command.
+  struct aa_ct_state max = cx->limit->max;
+  struct aa_ct_state min = cx->limit->min;
+
 
   for(size_t i=0; i < cx->ref_set->n_q; i++){
     double state_q = cx->state_set->state->q[i];
     double ref_q = cx->state_ref->q[i];
 
-
-
-    /* Remap to (-2*pi,2*pi) */
-    /* int offset = state_q / ( 2 * M_PI ); */
-    /* state_q -= offset*(2*M_PI); */
-    cx->state_set->state->q[i] = state_q;
-
-    /* offset = ref_q / (2*M_PI); */
-    /* ref_q -= offset*(2*M_PI); */
-    cx->state_ref->q[i] = ref_q;
+    double max_dq = max->dq[i];
+    double min_dq = min->dq[i];
 
     /* Calculate new motor velocity */
     double new_vel = cx->state_ref->dq[i]+kp*(ref_q - state_q);
+    if (new_vel > max_dq) new_vel = max_dq;
+    if (new_vel < min_dq) new_vel = min_dq;
+
     if(fabs(new_vel) < epsilon) new_vel = 0;
-    else h = 0;
+    else h = 0;			/* Don't sent halt, we are moving at least 1 joint */
     cx->ref_set->u[i] = new_vel;
 
     SNS_LOG(LOG_DEBUG, "%lu reference q: %f. Actual q: %f. dq: %f\n", i, ref_q,
