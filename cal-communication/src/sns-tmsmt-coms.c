@@ -95,7 +95,7 @@ static void send_action(struct cx *cx);
 enum ach_status send_interp(void *cx_);
 static void parse_operation(struct tmplan_op *op, struct cx *cx);
 
-double opt_frequency = 500000;
+double opt_frequency = 100;
 const double epsilon = 0.000001;
 
 int main(int argc, char **argv){
