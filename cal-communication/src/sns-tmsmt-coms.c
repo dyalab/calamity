@@ -342,8 +342,8 @@ enum ach_status send_interp(void *cx_){
 
   double kp = 1; //TODO: make this not a magic number
   int h = 1; //check to see if we should just send the halt command.
-  struct aa_ct_state max = cx->limit->max;
-  struct aa_ct_state min = cx->limit->min;
+  struct aa_ct_state* max = cx->limit->max;
+  struct aa_ct_state* min = cx->limit->min;
 
 
   for(size_t i=0; i < cx->ref_set->n_q; i++){
