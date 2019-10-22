@@ -354,7 +354,9 @@ enum ach_status send_interp(void *cx_){
     double min_dq = min->dq[i];
 
     /* Calculate new motor velocity */
-    double new_vel = cx->state_ref->dq[i]+kp*(ref_q - state_q);
+    double new_vel = kp*(ref_q - state_q);
+    if (r) new_vel = new_vel + cx->state_ref->dq[i];
+
     if (new_vel > max_dq) new_vel = max_dq;
     if (new_vel < min_dq) new_vel = min_dq;
 
@@ -362,8 +364,8 @@ enum ach_status send_interp(void *cx_){
     else h = 0;			/* Don't sent halt, we are moving at least 1 joint */
     cx->ref_set->u[i] = new_vel;
 
-    SNS_LOG(LOG_DEBUG, "%lu reference q: %f. Actual q: %f. dq: %f\n", i, ref_q,
-	    state_q, new_vel);
+    SNS_LOG(LOG_DEBUG, "%lu reference q: %f. Actual q: %f. ref_dq: %f dq: %f\n", i, ref_q,
+	    state_q, cx->state_ref->dq[i], new_vel);
   }
 
 
