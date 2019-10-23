@@ -2,7 +2,7 @@
 
 trap "kill 0" EXIT 		# Kill background processes if bash window is killed
 
-com="coms0"
+com="can0"
 goalPoint=$@
 realStateChan="realState"
 realRefChan="realRef"
@@ -67,7 +67,7 @@ read ans
 
 sns kill bg-ksim
 if [ $ans == "y" ]; then
-    sns_tmsmt_coms -y $realStateChan -u $realRefChan -a action -c change -p $planFile -o
+    sns_tmsmt_coms -y $realStateChan -u $realRefChan -a action -c change -p $planFile -o -f 10
 fi
 
 kill $comsPID
