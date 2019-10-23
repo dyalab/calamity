@@ -414,7 +414,7 @@ static void parse_operation(struct tmplan_op *op_, struct cx *cx){
 
     if(cx->seg_list) reset_list(cx);
 
-    cx->seg_list = aa_ct_tjq_lin_generate(cx->reg, pt_list, cx->limit);
+    cx->seg_list = aa_ct_tjq_trap_generate(cx->reg, pt_list, cx->limit);
     aa_ct_pt_list_destroy(pt_list);
 
     clock_gettime(ACH_DEFAULT_CLOCK, &cx->cur_time);
