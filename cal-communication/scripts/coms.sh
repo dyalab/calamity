@@ -48,7 +48,7 @@ run(){
     # 	sleep 1
     # done
 
-    exec can402 -f $dev -c $refChan -s $stateChan $nodes -vvvv -R 1 -C 0
+    exec can402 -f $dev -c $refChan -s $stateChan $nodes -R 1 -C 0
 
 
 

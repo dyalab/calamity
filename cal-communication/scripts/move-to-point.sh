@@ -52,7 +52,7 @@ export SNS_SCENE_NAME=schunk_on_table
 cd ../../schunk
 export SNS_SCENE_PLUGIN=`pwd`/.libs/schunk_on_table.so
 
-ach mk -1 action
+ach mk -1 state_ft_sensor
 ach mk -1 change
 ach mk -1 state
 ach mk -1 ref
@@ -65,9 +65,9 @@ ach mk -1 ref
 echo "Is it safe to run on a real robot? (y/n)"
 read ans
 
-sns kill bg-ksim
+#sns kill bg-ksim
 if [ $ans == "y" ]; then
-    sns_tmsmt_coms -y $realStateChan -u $realRefChan -a action -c change -p $planFile -o -f 10
+    sns_tmsmt_coms -y $realStateChan -u $realRefChan -a state_ft_sensor -c change -p $planFile -o -f 10
 fi
 
 kill $comsPID

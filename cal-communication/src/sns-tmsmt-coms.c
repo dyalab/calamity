@@ -36,6 +36,7 @@
 
 #include <getopt.h>
 #include <sys/stat.h>
+#include <unistd.h>
 
 #include <amino.h>
 #include <ach.h>
@@ -96,7 +97,7 @@ enum ach_status send_interp(void *cx_);
 static void parse_operation(struct tmplan_op *op, struct cx *cx);
 
 double opt_frequency = 100;
-const double epsilon = 0.000001;
+const double epsilon = 0.005;
 
 int main(int argc, char **argv){
   struct cx cx = {0};
@@ -207,10 +208,10 @@ int main(int argc, char **argv){
 
   for(size_t i=0; i< n_q; i++){
     min_q[i] = -M_PI/2;
-    min_dq[i] = -0.25;
+    min_dq[i] = -0.75;
     min_ddq[i] = -0.5;
     max_q[i] = M_PI/2;
-    max_dq[i] = 0.25;
+    max_dq[i] = 0.75;
     max_ddq[i] = 0.5;
   }
 
@@ -453,10 +454,10 @@ static void parse_operation(struct tmplan_op *op_, struct cx *cx){
     /* If we have read an action, write the past action to a channel if it exists */
   case TMPLAN_OP_ACTION:;
     struct tmplan_op_action *action_op = (struct tmplan_op_action*) op_;
-
-    if(cx->prev_action) send_action(cx);
     char* new_action = tmplan_op_action_get(action_op);
     cx->prev_action = new_action;
+    if(cx->prev_action) send_action(cx);
+    //cx->prev_action = new_action;
 
     /* Recurse if there is more to the list, otherwise just return */
   default:
@@ -478,6 +479,7 @@ static void send_action(struct cx *cx){
   sns_msg_set_time(&msg->header, &cx->cur_time, 0 );
   sns_msg_text_put(&cx->action_chan, msg);
   cx->prev_action = NULL;
+  sleep(5);
 }
 
 
