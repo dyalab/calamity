@@ -52,40 +52,40 @@
 #include <ach/experimental.h>
 
 struct cx {
-  struct aa_rx_sg *scenegraph;
+    struct aa_rx_sg *scenegraph;
 
-  struct sns_motor_channel *arm_in;
-  struct sns_motor_channel *arm_out;
+    struct sns_motor_channel *arm_in;
+    struct sns_motor_channel *arm_out;
 
-  struct sns_motor_ref_set *ref_set;
-  struct sns_motor_state_set *state_set;
+    struct sns_motor_ref_set *ref_set;
+    struct sns_motor_state_set *state_set;
 
-  aa_rx_frame_id end_effector;
+    aa_rx_frame_id end_effector;
 
-  struct sns_evhandler *handlers;
+    struct sns_evhandler *handlers;
 
-  double t;
-  double duration;
-  int64_t timestep;
-  struct timespec cur_time;
+    double t;
+    double duration;
+    int64_t timestep;
+    struct timespec cur_time;
 
-  char *plan_file;
-  struct timespec file_mod_time;
-  struct stat file_stat;
+    char *plan_file;
+    struct timespec file_mod_time;
+    struct stat file_stat;
 
-  struct ach_channel reparent;
-  struct ach_channel action_chan;
+    struct ach_channel reparent;
+    struct ach_channel action_chan;
 
-  char *prev_action;
+    char *prev_action;
 
-  struct aa_ct_state *state_ref;
-  struct aa_ct_seg_list *seg_list;
-  struct tmplan *plan;
+    struct aa_ct_state *state_ref;
+    struct aa_ct_seg_list *seg_list;
+    struct tmplan *plan;
 
-  struct aa_mem_region* reg;
-  struct aa_ct_limit* limit;
+    struct aa_mem_region* reg;
+    struct aa_ct_limit* limit;
 
-  int only_one;
+    int only_one;
 };
 
 
@@ -95,8 +95,8 @@ static void send_action(struct cx *cx);
 enum ach_status send_interp(void *cx_);
 static void parse_operation(struct tmplan_op *op, struct cx *cx);
 
-double opt_frequency = 100;
-const double epsilon = 0.000001;
+double opt_frequency = 10;
+const double epsilon = 0.001;
 
 int main(int argc, char **argv){
   struct cx cx = {0};
@@ -108,8 +108,8 @@ int main(int argc, char **argv){
   while( (c = getopt( argc, argv, "a:u:y:e:h?f:p:c:o" SNS_OPTSTRING)) != -1 ) {
     switch(c) {
       SNS_OPTCASES_VERSION("sns-amino-controller",
-			   "Copyright (c) 2019, Colorado School of Mines\n",
-			   "Matthew A. Schack")
+                           "Copyright (c) 2019, Colorado School of Mines\n",
+                           "Matthew A. Schack")
     case 'a':
       opt_action_channel = strdup(optarg);
       break;
@@ -137,16 +137,16 @@ int main(int argc, char **argv){
     case '?':   /* help     */
     case 'h':
       puts( "Usage: sns-amino-ctrl -u <from-arm> -y <to-arm>\n"
-	    "Teleop a robot.\n"
-	    "\n"
-	    "Options:\n"
-	    "  -y <channel>,             current state of the arm (state)\n"
-	    "  -u <channel>,             Motor velocities to move (ref)\n"
-	    "  -p <file>,                File name for an input plan\n"
-	    "  -e <frame>,               end-effector frame\n"
-	    "  -V,                       Print program version\n"
-	    "  -?,                       display this help and exit\n"
-	    "Report bugs to " PACKAGE_BUGREPORT );
+            "Teleop a robot.\n"
+            "\n"
+            "Options:\n"
+            "  -y <channel>,             current state of the arm (state)\n"
+            "  -u <channel>,             Motor velocities to move (ref)\n"
+            "  -p <file>,                File name for an input plan\n"
+            "  -e <frame>,               end-effector frame\n"
+            "  -V,                       Print program version\n"
+            "  -?,                       display this help and exit\n"
+            "Report bugs to " PACKAGE_BUGREPORT );
       exit(EXIT_SUCCESS);
     default:
       SNS_DIE("Unknown Option: `%c'\n", c);
@@ -177,8 +177,8 @@ int main(int argc, char **argv){
 
   /* Output channel to arm */
   sns_motor_ref_init(cx.scenegraph,
-		     cx.arm_out, &cx.ref_set,
-		     0, NULL );
+                     cx.arm_out, &cx.ref_set,
+                     0, NULL );
 
 
   /* Input channel from arm */
@@ -186,8 +186,8 @@ int main(int argc, char **argv){
   size_t handler_count = n_state;
   cx.handlers = AA_NEW_AR(struct sns_evhandler, handler_count);
   sns_motor_state_init(cx.scenegraph,
-		       cx.arm_in, &cx.state_set,
-		       n_state,cx.handlers);
+                       cx.arm_in, &cx.state_set,
+                       n_state,cx.handlers);
 
 
   /* Reparent channel */
@@ -278,9 +278,9 @@ int main(int argc, char **argv){
 
   /* Loop through points and send the interpolation */
   enum ach_status r = sns_evhandle(cx.handlers,handler_count,
-				   &sleep_dur, send_interp, &cx,
-				   sns_sig_term_default,
-				   ACH_EV_O_PERIODIC_TIMEOUT);
+                                   &sleep_dur, send_interp, &cx,
+                                   sns_sig_term_default,
+                                   ACH_EV_O_PERIODIC_TIMEOUT);
 
   halt(&cx);
   SNS_REQUIRE( sns_cx.shutdown || (ACH_OK == r),
@@ -300,8 +300,8 @@ enum ach_status send_interp(void *cx_){
   /* Check to see if the plan file has been updated */
   if( stat(cx->plan_file, &cx->file_stat) == 0 ){ //Success
     if( cx->file_mod_time.tv_sec < cx->file_stat.st_mtim.tv_sec ||
-	(cx->file_mod_time.tv_sec == cx->file_stat.st_mtim.tv_sec &&
-	 cx->file_mod_time.tv_nsec < cx->file_stat.st_mtim.tv_nsec)){
+        (cx->file_mod_time.tv_sec == cx->file_stat.st_mtim.tv_sec &&
+         cx->file_mod_time.tv_nsec < cx->file_stat.st_mtim.tv_nsec)){
       /* Stop the arm */
       reset_list(cx);
 
@@ -365,7 +365,7 @@ enum ach_status send_interp(void *cx_){
     cx->ref_set->u[i] = new_vel;
 
     SNS_LOG(LOG_DEBUG, "%lu reference q: %f. Actual q: %f. ref_dq: %f dq: %f\n", i, ref_q,
-	    state_q, cx->state_ref->dq[i], new_vel);
+            state_q, cx->state_ref->dq[i], new_vel);
   }
 
 
@@ -381,24 +381,27 @@ enum ach_status send_interp(void *cx_){
 
 static void parse_operation(struct tmplan_op *op_, struct cx *cx){
   /* We have processed the last element destroy the plan */
+  SNS_LOG(LOG_DEBUG, "parse operation\n");
   if( !op_){
     if(cx->prev_action) send_action(cx); // Consider the last action as performed
     aa_mem_region_pop(cx->reg, cx->plan);
     cx->plan = NULL;
     return;
   }
-
+  SNS_LOG(LOG_DEBUG, "trying to figure out the next thing: %d\n", tmplan_op_type(op_));
+  SNS_LOG(LOG_DEBUG, "ACTION: %d\n", TMPLAN_OP_ACTION);
   switch ( tmplan_op_type( op_ ) ){
 
     /* Create a new segment list from the motion plan */
   case TMPLAN_OP_MOTION_PLAN:;
+    SNS_LOG(LOG_DEBUG, "parsing motion plan\n");
     struct tmplan_op_motion_plan *op = (struct tmplan_op_motion_plan*) op_;
     double* points = tmplan_op_motion_plan_path( op );
     size_t n_q = cx->ref_set->n_q;
     size_t size = tmplan_op_motion_plan_path_size( op );
     size_t n_points = size / n_q;
 
-    if(n_points == 0) goto RECURSE;
+    if(n_points == 0 || n_points == 1) goto RECURSE;
 
     struct aa_ct_pt_list *pt_list = aa_ct_pt_list_create(cx->reg);
     aa_ct_pt_list_add_q(pt_list,n_q,cx->state_set->state->q);
@@ -407,14 +410,14 @@ static void parse_operation(struct tmplan_op *op_, struct cx *cx){
       aa_ct_pt_list_add_q(pt_list, n_q, &points[i*n_q]);
       SNS_LOG(LOG_DEBUG, "Added point: ");
       for (size_t j=0; j < n_q; j++){
-	SNS_LOG(LOG_DEBUG, "%f ", points[i*n_q+j]);
+        SNS_LOG(LOG_DEBUG, "%f ", points[i*n_q+j]);
       }
       SNS_LOG(LOG_DEBUG, "\n");
     }
 
     if(cx->seg_list) reset_list(cx);
 
-    cx->seg_list = aa_ct_tjq_trap_generate(cx->reg, pt_list, cx->limit);
+    cx->seg_list = aa_ct_tjq_lin_generate(cx->reg, pt_list, cx->limit);
     aa_ct_pt_list_destroy(pt_list);
 
     clock_gettime(ACH_DEFAULT_CLOCK, &cx->cur_time);
@@ -423,6 +426,7 @@ static void parse_operation(struct tmplan_op *op_, struct cx *cx){
 
     /* Reparent frames that need to be reparented */
   case TMPLAN_OP_REPARENT:;
+    SNS_LOG(LOG_DEBUG, "parsing reparent\n");
     struct tmplan_op_reparent *reparent_op = (struct tmplan_op_reparent*) op_;
     size_t n_frame = 0, n_parent = 0;
     const char *frame  = tmplan_op_reparent_get_frame( reparent_op);
@@ -434,32 +438,45 @@ static void parse_operation(struct tmplan_op *op_, struct cx *cx){
       n_parent++;
     }
 
-    const char* r = "reparent ";
-    size_t total_size = 11 + n_frame + n_parent;
-    struct sns_msg_text* msg = sns_msg_text_region_alloc(cx->reg, total_size);
+    struct sns_msg_sg_update* msg = sns_msg_sg_update_region_alloc(cx->reg, 1);
+    msg->type = SNS_REPARENT_FRAME;
+    msg->frame = aa_rx_sg_frame_id(cx->scenegraph, frame);
+    msg->parent = aa_rx_sg_frame_id(cx->scenegraph, parent);
 
-    strcpy(msg->text, r);
-    strcpy(&msg->text[9],frame);
-    msg->text[n_frame + 9]=' ';
-    strcpy(&msg->text[n_frame + 10], parent);
-    msg->text[n_frame + 10 + n_parent] = '\0';
+
+    double q[4] = {0,0,0,1};
+    double v[3] = {0,0,0};
+
+    AA_MEM_CPY(msg->q, q, 4);
+    AA_MEM_CPY(msg->v, v, 3);
+
+    double E1[7];
+    AA_MEM_CPY(E1, msg->q, 4);
+    AA_MEM_CPY(&E1[4], msg->v, 3);
+
+    aa_rx_sg_reparent_id(cx->scenegraph, msg->parent, msg->frame, E1);
+    aa_rx_sg_init(cx->scenegraph);
 
     sns_msg_set_time( &msg->header, &cx->cur_time, 0 );
 
-    sns_msg_text_put(&cx->reparent, msg);
+    sns_msg_sg_update_put(&cx->reparent, msg);
 
     goto RECURSE;
 
     /* If we have read an action, write the past action to a channel if it exists */
   case TMPLAN_OP_ACTION:;
+    SNS_LOG(LOG_DEBUG, "parsing action\n");
     struct tmplan_op_action *action_op = (struct tmplan_op_action*) op_;
-
+    SNS_LOG(LOG_DEBUG, "created struct\n");
     if(cx->prev_action) send_action(cx);
     char* new_action = tmplan_op_action_get(action_op);
+    SNS_LOG(LOG_DEBUG, "got new action\n");
     cx->prev_action = new_action;
+    SNS_LOG(LOG_DEBUG, "saved action\n");
 
     /* Recurse if there is more to the list, otherwise just return */
   default:
+    SNS_LOG(LOG_DEBUG, "recursing\n");
     goto RECURSE;
   }
 
@@ -470,6 +487,7 @@ static void parse_operation(struct tmplan_op *op_, struct cx *cx){
 }
 
 static void send_action(struct cx *cx){
+  SNS_LOG(LOG_DEBUG, "sending action\n");
   size_t a_size = 0;
   char* action = cx->prev_action;
   while( '\0' != action[a_size]) a_size++;

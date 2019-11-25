@@ -4,6 +4,7 @@ trap "kill 0" EXIT 		# Kill background processes if bash window is killed
 
 start=""
 goal=""
+action=""
 
 cd `dirname "$0"`
 
@@ -22,8 +23,9 @@ run(){
     touch $planFile
 
     echo $firstLine >> $planFile
-    echo "p $start" >> $planFile
-    echo "p $goal" >> $planFile
+    echo "p$start" >> $planFile
+    echo "p$goal" >> $planFile
+
 
     export ROS_PACKAGE_PATH=/home/mschack/Git/schunk_modular_robotics/
     export SNS_SCENE_NAME=schunk_on_table
@@ -49,17 +51,25 @@ run(){
 
 acc_start=""
 acc_goal=""
+acc_action=""
 while test "x$1" != x-- -a "x$#" != x0; do
     key="$1"
     case $key in
 	-s)
 	    acc_start="t"
+            acc_action=""
 	    acc_goal=""
 	    ;;
 	-g)
 	    acc_start=""
+            acc_action=""
 	    acc_goal="t"
 	    ;;
+        -a)
+            acc_start=""
+            acc_action="t"
+	    acc_goal=""
+            ;;
 	-h)
 	    cat <<EOF
 Usage: sim-to-point -s start point -g goal point
@@ -73,7 +83,10 @@ EOF
 	    elif [ -n "$acc_goal" ]
 	    then
 		goal="$goal $key"
-	    fi
+	    elif [ -n "acc_action" ]
+            then
+                action="$action $key"
+            fi
     esac
     shift
 done
