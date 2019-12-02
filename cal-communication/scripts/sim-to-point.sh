@@ -1,6 +1,6 @@
 #!/bin/bash
 
-trap "kill 0" EXIT 		# Kill background processes if bash window is killed
+trap "kill 0" EXIT              # Kill background processes if bash window is killed
 
 start=""
 goal=""
@@ -43,6 +43,8 @@ run(){
     sns run -d -r bg-ksim -- sns-ksim -y $simStateChan -u $simRefChan
     snsref $simRefChan -p -- $start
 
+    sleep 1
+
     sns_tmsmt_coms -y $simStateChan -u $simRefChan -a action -c change -p $planFile -vv -o
     echo "Hit enter to quit"
     read $ans
@@ -55,35 +57,35 @@ acc_action=""
 while test "x$1" != x-- -a "x$#" != x0; do
     key="$1"
     case $key in
-	-s)
-	    acc_start="t"
+        -s)
+            acc_start="t"
             acc_action=""
-	    acc_goal=""
-	    ;;
-	-g)
-	    acc_start=""
+            acc_goal=""
+            ;;
+        -g)
+            acc_start=""
             acc_action=""
-	    acc_goal="t"
-	    ;;
+            acc_goal="t"
+            ;;
         -a)
             acc_start=""
             acc_action="t"
-	    acc_goal=""
+            acc_goal=""
             ;;
-	-h)
-	    cat <<EOF
+        -h)
+            cat <<EOF
 Usage: sim-to-point -s start point -g goal point
 EOF
-	    exit 0
-	    ;;
-	*)
-	    if [ -n "$acc_start" ]
-	    then
-		start="$start $key"
-	    elif [ -n "$acc_goal" ]
-	    then
-		goal="$goal $key"
-	    elif [ -n "acc_action" ]
+            exit 0
+            ;;
+        *)
+            if [ -n "$acc_start" ]
+            then
+                start="$start $key"
+            elif [ -n "$acc_goal" ]
+            then
+                goal="$goal $key"
+            elif [ -n "acc_action" ]
             then
                 action="$action $key"
             fi

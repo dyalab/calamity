@@ -301,7 +301,8 @@ enum ach_status send_interp(void *cx_){
 
   /* Check to see if the plan file has been updated */
   if( stat(cx->plan_file, &cx->file_stat) == 0 ){ //Success
-    if( cx->file_mod_time.tv_sec < cx->file_stat.st_mtim.tv_sec ||
+    if( cx->file_mod_time.tv_sec == 0 ||
+        cx->file_mod_time.tv_sec < cx->file_stat.st_mtim.tv_sec ||
         (cx->file_mod_time.tv_sec == cx->file_stat.st_mtim.tv_sec &&
          cx->file_mod_time.tv_nsec < cx->file_stat.st_mtim.tv_nsec)){
       /* Stop the arm */
@@ -341,6 +342,7 @@ enum ach_status send_interp(void *cx_){
 
   /* interpolate */
   int r = aa_ct_seg_list_eval(cx->seg_list,cx->state_ref,cx->t);
+  if (!r) SNS_LOG(LOG_DEBUG, "out of seg list bounds\n");
 
   double kp = 1; //TODO: make this not a magic number
   int h = 1; //check to see if we should just send the halt command.
@@ -362,7 +364,7 @@ enum ach_status send_interp(void *cx_){
     if (new_vel > max_dq) new_vel = max_dq;
     if (new_vel < min_dq) new_vel = min_dq;
 
-    if(fabs(new_vel) < epsilon) new_vel = 0;
+    if(fabs(state_q-ref_q) < epsilon) new_vel = 0;
     else h = 0;			/* Don't sent halt, we are moving at least 1 joint */
     cx->ref_set->u[i] = new_vel;
 
@@ -403,10 +405,16 @@ static void parse_operation(struct tmplan_op *op_, struct cx *cx){
     size_t size = tmplan_op_motion_plan_path_size( op );
     size_t n_points = size / n_q;
 
-    if(n_points == 0 || n_points == 1) goto RECURSE;
+    if(n_points == 0) goto RECURSE;
 
     struct aa_ct_pt_list *pt_list = aa_ct_pt_list_create(cx->reg);
-    aa_ct_pt_list_add_q(pt_list,n_q,cx->state_set->state->q);
+    /* aa_ct_pt_list_add_q(pt_list,n_q,cx->state_set->state->q); */
+
+    /* SNS_LOG(LOG_DEBUG, "Added point: "); */
+    /* for ( size_t i = 0; i < n_q; i++){ */
+    /*     SNS_LOG(LOG_DEBUG, "%f ", cx->state_set->state->q); */
+    /* } */
+    /* SNS_LOG(LOG_DEBUG, "\n"); */
 
     for ( size_t i = 0; i < n_points; i++){
       aa_ct_pt_list_add_q(pt_list, n_q, &points[i*n_q]);
@@ -440,28 +448,14 @@ static void parse_operation(struct tmplan_op *op_, struct cx *cx){
       n_parent++;
     }
 
-    struct sns_msg_sg_update* msg = sns_msg_sg_update_region_alloc(cx->reg, 1);
-    msg->type = SNS_REPARENT_FRAME;
-    msg->frame = aa_rx_sg_frame_id(cx->scenegraph, frame);
-    msg->parent = aa_rx_sg_frame_id(cx->scenegraph, parent);
-
-
     double q[4] = {0,0,0,1};
     double v[3] = {0,0,0};
 
-    AA_MEM_CPY(msg->q, q, 4);
-    AA_MEM_CPY(msg->v, v, 3);
-
-    double E1[7];
-    AA_MEM_CPY(E1, msg->q, 4);
-    AA_MEM_CPY(&E1[4], msg->v, 3);
-
-    aa_rx_sg_reparent_id(cx->scenegraph, msg->parent, msg->frame, E1);
-    aa_rx_sg_init(cx->scenegraph);
-
-    sns_msg_set_time( &msg->header, &cx->cur_time, 0 );
-
-    sns_msg_sg_update_put(&cx->reparent, msg);
+    SNS_LOG(LOG_DEBUG, "frame: %s. Parent: %s\n", frame, parent);
+    sg_make_reparent_and_send( cx->scenegraph, &cx->reparent,
+                               aa_rx_sg_frame_id(cx->scenegraph, frame),
+                               aa_rx_sg_frame_id(cx->scenegraph, parent),
+                               q, v, cx->reg);
 
     goto RECURSE;
 
@@ -469,11 +463,8 @@ static void parse_operation(struct tmplan_op *op_, struct cx *cx){
   case TMPLAN_OP_ACTION:;
     SNS_LOG(LOG_DEBUG, "parsing action\n");
     struct tmplan_op_action *action_op = (struct tmplan_op_action*) op_;
-    SNS_LOG(LOG_DEBUG, "created struct\n");
     char* new_action = tmplan_op_action_get(action_op);
-    SNS_LOG(LOG_DEBUG, "got new action\n");
     cx->prev_action = new_action;
-    SNS_LOG(LOG_DEBUG, "saved action\n");
     if(cx->prev_action) send_action(cx);
     //cx->prev_action = new_action;
 
