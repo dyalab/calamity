@@ -45,7 +45,7 @@ run(){
 
     sleep 1
 
-    sns_tmsmt_coms -y $simStateChan -u $simRefChan -a action -c change -p $planFile -vv -o
+    sns_tmsmt_coms -y $simStateChan -u $simRefChan -a action -c change -p $planFile -vv -o -f 10
     echo "Hit enter to quit"
     read $ans
     sns kill bg-ksim
