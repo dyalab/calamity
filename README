@@ -1,16 +1,4 @@
-This repo will provide a space for our group to collaborate on various
-aspects of the Calamity Robot.
-
-The different things stored here are as follows:
-
-cal-communication - communication scripts to get the arm up and
-running
-
-circuit-domain - a PDDL domain and scenegraph for having the robot
-create circuits
-
-RS-485 - General RS-485 protocol info
-
-schunk - Schunk urdfs and compiled Schunk scenegraphs
-
-sns_teleop - teleop scripts for joystick control
+This repo has necessary scripts and programs to run the Calamity
+robot. It is a combination of controller programs, and scripts that
+run the proper sequence of commands to have the robot listen for
+commands.
