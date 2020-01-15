@@ -8,7 +8,6 @@
 *.lo
 */.libs*
 *config.h
-*.in
 *Makefile
 *.m4
 *core
