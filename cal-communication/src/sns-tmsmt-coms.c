@@ -408,13 +408,13 @@ static void parse_operation(struct tmplan_op *op_, struct cx *cx){
     if(n_points == 0) goto RECURSE;
 
     struct aa_ct_pt_list *pt_list = aa_ct_pt_list_create(cx->reg);
-    /* aa_ct_pt_list_add_q(pt_list,n_q,cx->state_set->state->q); */
+    aa_ct_pt_list_add_q(pt_list,n_q,cx->state_set->state->q);
 
-    /* SNS_LOG(LOG_DEBUG, "Added point: "); */
-    /* for ( size_t i = 0; i < n_q; i++){ */
-    /*     SNS_LOG(LOG_DEBUG, "%f ", cx->state_set->state->q); */
-    /* } */
-    /* SNS_LOG(LOG_DEBUG, "\n"); */
+    SNS_LOG(LOG_DEBUG, "Added point: ");
+    for ( size_t i = 0; i < n_q; i++){
+        SNS_LOG(LOG_DEBUG, "%f ", cx->state_set->state->q);
+    }
+    SNS_LOG(LOG_DEBUG, "\n");
 
     for ( size_t i = 0; i < n_points; i++){
       aa_ct_pt_list_add_q(pt_list, n_q, &points[i*n_q]);
@@ -424,6 +424,8 @@ static void parse_operation(struct tmplan_op *op_, struct cx *cx){
       }
       SNS_LOG(LOG_DEBUG, "\n");
     }
+
+    if(aa_ct_pt_list_size(pt_list) <= 1) {aa_ct_pt_list_destroy(pt_list); goto RECURSE;}
 
     if(cx->seg_list) reset_list(cx);
 
@@ -490,7 +492,6 @@ static void send_action(struct cx *cx){
   sns_msg_set_time(&msg->header, &cx->cur_time, 0 );
   sns_msg_text_put(&cx->action_chan, msg);
   cx->prev_action = NULL;
-  sleep(5);
 }
 
 
