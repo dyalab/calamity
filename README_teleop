@@ -15,7 +15,7 @@ Set Up Environment
 * The sns tutorial has you running the command:
 
       	cd amino && ./configure --enable-demos --enable-demo-schunk && make
-	
+
 * But I think that since you already have the necessary urdf files this may not be necessary?
 
 Run Simulation Tests
@@ -24,7 +24,7 @@ Run Simulation Tests
 * These are optional but will help check that you can run the simulation without any added complications
 * You can look for errors in /var/log/user.log and /var/log/syslog
 * Simulate the arm:
-  
+
 	sns start
   	sns-ksim -y state -u ref
   	sns stop
@@ -58,6 +58,7 @@ Teleoperate the Arm
              -y state \
              -u ref \
              -Q 4 -m "robot_1_joint,robot_2_joint,robot_3_joint,robot_4_joint" \
-             -Q 5 -m "robot_5_joint,robot_6_joint,robot_7_joint"
+             -Q 5 -m "robot_5_joint,robot_6_joint,robot_7_joint" \
+             -e end_effector_grasp -w
 
 *That should be it!

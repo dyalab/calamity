@@ -15,7 +15,7 @@ pkg_search_module(ACH REQUIRED ach)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 add_executable( sns_tmsmt_coms src/sns-tmsmt-coms.c)
-target_include_directories( sns_tmsmt_coms PUBLIC ${CMAKE_CURRENT_BINARY_DIR}
+target_include_directories( sns_tmsmt_coms PUBLIC include/ ${CMAKE_CURRENT_BINARY_DIR}
     ${AMINO_INCLUDE_DIRS}  ${ACH_INCLUDE_DIRS} ${SNS_INCLUDE_DIRS}
     )
   target_link_libraries( sns_tmsmt_coms
@@ -23,7 +23,7 @@ target_include_directories( sns_tmsmt_coms PUBLIC ${CMAKE_CURRENT_BINARY_DIR}
     )
 message("${AMINO_LIBRARIES} ${ACH_LIBRARIES} ${SNS_LIBRARIES} -ltmsmt")
 install(TARGETS sns_tmsmt_coms
- RUNTIME DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+ RUNTIME DESTINATION bin)
 
 
 # uninstall target
